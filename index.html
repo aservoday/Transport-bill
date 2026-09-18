@@ -7,6 +7,7 @@
 
 <style>
 *{box-sizing:border-box}
+
 body{
     margin:0;
     font-family:Arial,sans-serif;
@@ -14,10 +15,12 @@ body{
     color:#111827;
     padding:15px;
 }
+
 .container{
     max-width:900px;
     margin:auto;
 }
+
 .card{
     background:white;
     border-radius:15px;
@@ -25,18 +28,29 @@ body{
     margin-bottom:15px;
     box-shadow:0 2px 10px rgba(0,0,0,.08);
 }
-h1,h2{text-align:center;margin:5px 0}
-.subtitle{text-align:center;color:#666;margin-bottom:20px}
+
+h1,h2{
+    text-align:center;
+    margin:5px 0;
+}
+
+.subtitle{
+    text-align:center;
+    color:#666;
+    margin-bottom:20px;
+}
 
 .form-grid{
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:12px;
 }
+
 label{
     font-weight:bold;
     font-size:14px;
 }
+
 input,select{
     width:100%;
     padding:12px;
@@ -55,37 +69,57 @@ button{
     cursor:pointer;
     margin-top:10px;
 }
-.add{background:#2563eb;color:white}
-.save{background:#16a34a;color:white}
-.share{background:#25D366;color:white}
-.print{background:#111827;color:white}
-.clear{background:#dc2626;color:white}
 
-.student-row{
+.add{
+    background:#2563eb;
+    color:white;
+}
+
+.save{
+    background:#16a34a;
+    color:white;
+}
+
+.share{
+    background:#25D366;
+    color:white;
+}
+
+.print{
+    background:#111827;
+    color:white;
+}
+
+.clear{
+    background:#dc2626;
+    color:white;
+}
+
+.student-card{
+    border:1px solid #ddd;
+    border-radius:12px;
+    padding:14px;
+    margin-top:10px;
+    background:#fff;
+}
+
+.student-grid{
     display:grid;
-    grid-template-columns:35px 2fr 1fr 1.5fr 1fr 42px;
-    gap:7px;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.card-head{
+    display:flex;
+    justify-content:space-between;
     align-items:center;
-    margin-bottom:8px;
 }
-.student-row input{
-    margin:0;
-    padding:10px;
-}
+
 .remove{
     background:#fee2e2;
     color:#dc2626;
-    padding:10px;
+    padding:8px 12px;
     margin:0;
-}
-
-.table-head{
-    display:grid;
-    grid-template-columns:35px 2fr 1fr 1.5fr 1fr 42px;
-    gap:7px;
-    font-weight:bold;
-    font-size:12px;
-    margin-bottom:8px;
 }
 
 .total{
@@ -104,6 +138,34 @@ button{
     gap:8px;
 }
 
+.receipt{
+    background:white;
+}
+
+.school-name{
+    font-size:22px;
+    font-weight:bold;
+    text-align:center;
+}
+
+.tagline{
+    text-align:center;
+    color:#555;
+    margin-top:5px;
+}
+
+.bill-title{
+    text-align:center;
+    font-size:20px;
+    font-weight:bold;
+    margin:18px 0;
+}
+
+.receipt-row{
+    border-bottom:1px solid #ddd;
+    padding:10px 0;
+}
+
 .saved-bill{
     border:1px solid #ddd;
     border-radius:10px;
@@ -115,39 +177,31 @@ button{
     gap:10px;
 }
 
-.receipt{
-    background:white;
-}
-
-.school-name{
-    font-size:22px;
-    font-weight:bold;
-    text-align:center;
-}
-.tagline{
-    text-align:center;
-    color:#555;
-    margin-top:5px;
-}
-.bill-title{
-    text-align:center;
-    font-size:20px;
-    font-weight:bold;
-    margin:18px 0;
-}
-
 @media(max-width:650px){
-    .form-grid{grid-template-columns:1fr}
-    .table-wrap{overflow-x:auto}
-    .student-row,.table-head{
-        min-width:650px;
+
+    .form-grid,
+    .student-grid{
+        grid-template-columns:1fr;
     }
+
 }
 
 @media print{
-    body{background:white;padding:0}
-    body *{visibility:hidden}
-    #receipt,#receipt *{visibility:visible}
+
+    body{
+        background:white;
+        padding:0;
+    }
+
+    body *{
+        visibility:hidden;
+    }
+
+    #receipt,
+    #receipt *{
+        visibility:visible;
+    }
+
     #receipt{
         position:absolute;
         left:0;
@@ -155,7 +209,11 @@ button{
         width:100%;
         box-shadow:none;
     }
-    .no-print{display:none!important}
+
+    .no-print{
+        display:none!important;
+    }
+
 }
 </style>
 </head>
@@ -165,14 +223,22 @@ button{
 <div class="container">
 
 <div class="card no-print">
+
 <h1>🚌 Transport Bill Generator</h1>
-<p class="subtitle">Multiple Student Bill</p>
+
+<p class="subtitle">
+Multiple Student Bill
+</p>
 
 <div class="form-grid">
 
 <div>
-<label>Month</label>
+
+<label>
+Month
+
 <select id="month">
+
 <option>January</option>
 <option>February</option>
 <option>March</option>
@@ -185,20 +251,44 @@ button{
 <option>October</option>
 <option>November</option>
 <option>December</option>
+
 </select>
+
+</label>
+
 </div>
 
 <div>
-<label>Year</label>
-<input id="year" type="number" value="2026">
+
+<label>
+Year
+
+<input
+id="year"
+type="number"
+value="2026"
+>
+
+</label>
+
 </div>
 
 <div>
-<label>Driver Name</label>
-<input id="driver" placeholder="Enter driver name">
+
+<label>
+Driver Name
+
+<input
+id="driver"
+placeholder="Enter driver name"
+>
+
+</label>
+
 </div>
 
 </div>
+
 </div>
 
 
@@ -206,76 +296,115 @@ button{
 
 <h2>Students</h2>
 
-<div class="table-wrap">
-
-<div class="table-head">
-<span>No.</span>
-<span>Student Name</span>
-<span>Class</span>
-<span>Village</span>
-<span>Fee ₹</span>
-<span></span>
-</div>
-
 <div id="students"></div>
 
+<button
+class="add"
+onclick="addStudent()"
+>
++ Add Student
+</button>
+
 </div>
 
-<button class="add" onclick="addStudent()">+ Add Student</button>
 
-</div>
-
-
-<div class="card receipt" id="receipt">
+<div
+class="card receipt"
+id="receipt"
+>
 
 <div class="school-name">
+
 AMICHAND SERVODAY CONVENT SCHOOL
+
 </div>
 
 <div class="tagline">
+
 Education • Discipline • Values • Success
+
 </div>
 
 <div class="bill-title">
+
 TRANSPORT FEE BILL
+
 </div>
 
-<div style="display:flex;justify-content:space-between;margin-bottom:15px">
+<div
+style="
+display:flex;
+justify-content:space-between;
+margin-bottom:15px
+"
+>
+
 <div>
-Month: <b id="billMonth">September 2026</b>
+
+Month:
+<b id="billMonth">
+September 2026
+</b>
+
 </div>
+
 <div>
-Driver: <b id="billDriver">—</b>
-</div>
+
+Driver:
+<b id="billDriver">
+—
+</b>
+
 </div>
 
-<div class="table-wrap">
-
-<div class="table-head">
-<span>No.</span>
-<span>Student Name</span>
-<span>Class</span>
-<span>Village</span>
-<span>Fee ₹</span>
-<span></span>
 </div>
 
 <div id="receiptStudents"></div>
 
-</div>
-
 <div class="total">
-<span>GRAND TOTAL</span>
-<span id="grandTotal">₹0</span>
+
+<span>
+GRAND TOTAL
+</span>
+
+<span id="grandTotal">
+₹0
+</span>
+
 </div>
 
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:50px;text-align:center">
-<div style="border-top:1px solid #555;padding-top:8px">
+<div
+style="
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:40px;
+margin-top:50px;
+text-align:center
+"
+>
+
+<div
+style="
+border-top:1px solid #555;
+padding-top:8px
+"
+>
+
 Driver Signature
+
 </div>
-<div style="border-top:1px solid #555;padding-top:8px">
+
+<div
+style="
+border-top:1px solid #555;
+padding-top:8px
+"
+>
+
 School Stamp
+
 </div>
+
 </div>
 
 </div>
@@ -285,19 +414,31 @@ School Stamp
 
 <div class="actions">
 
-<button class="save" onclick="saveBill()">
+<button
+class="save"
+onclick="saveBill()"
+>
 💾 Save Bill
 </button>
 
-<button class="share" onclick="shareBill()">
+<button
+class="share"
+onclick="shareBill()"
+>
 📲 Share Bill
 </button>
 
-<button class="print" onclick="window.print()">
+<button
+class="print"
+onclick="window.print()"
+>
 🖨️ Print / Save PDF
 </button>
 
-<button class="clear" onclick="clearAll()">
+<button
+class="clear"
+onclick="clearAll()"
+>
 🗑️ Clear
 </button>
 
@@ -308,9 +449,14 @@ School Stamp
 
 <div class="card no-print">
 
-<h2>💾 Saved Bills</h2>
+<h2>
+💾 Saved Bills
+</h2>
+
 <div id="savedBills">
+
 No bills saved yet.
+
 </div>
 
 </div>
@@ -320,23 +466,57 @@ No bills saved yet.
 
 <script>
 
-let students=[];
-let savedBills=[];
+let students = [];
+
+let savedBills = [];
 
 try{
-savedBills=JSON.parse(localStorage.getItem("transportBills")||"[]");
-}catch(e){
+
+savedBills =
+JSON.parse(
+localStorage.getItem("transportBills") || "[]"
+);
+
+if(!Array.isArray(savedBills)){
 savedBills=[];
 }
 
+}catch(e){
 
-function addStudent(name="",cls="",village="",fee=""){
+savedBills=[];
+
+}
+
+
+function escapeHTML(str){
+
+return String(str || "")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+
+function addStudent(
+name="",
+cls="",
+village="",
+fee=""
+){
 
 students.push({
+
 name:name,
+
 cls:cls,
+
 village:village,
-fee:Number(fee)||0
+
+fee:Number(fee) || 0
+
 });
 
 render();
@@ -347,6 +527,7 @@ render();
 function removeStudent(index){
 
 students.splice(index,1);
+
 render();
 
 }
@@ -354,15 +535,43 @@ render();
 
 function render(){
 
-let html="";
+let box =
+document.getElementById("students");
 
-students.forEach((s,i)=>{
+box.innerHTML="";
 
-html+=`
 
-<div class="student-row">
+students.forEach(function(s,i){
 
-<span>${i+1}</span>
+let card =
+document.createElement("div");
+
+card.className="student-card";
+
+
+card.innerHTML=`
+
+<div class="card-head">
+
+<b>
+Student ${i+1}
+</b>
+
+<button
+class="remove"
+onclick="removeStudent(${i})"
+>
+Remove
+</button>
+
+</div>
+
+
+<div class="student-grid">
+
+<label>
+
+Student Name
 
 <input
 value="${escapeHTML(s.name)}"
@@ -370,17 +579,38 @@ placeholder="Student name"
 oninput="updateStudent(${i},'name',this.value)"
 >
 
+</label>
+
+
+<label>
+
+Class
+
 <input
 value="${escapeHTML(s.cls)}"
-placeholder="Class"
+placeholder="e.g. 5th"
 oninput="updateStudent(${i},'cls',this.value)"
 >
 
+</label>
+
+
+<label>
+
+Village
+
 <input
 value="${escapeHTML(s.village)}"
-placeholder="Village"
+placeholder="Village name"
 oninput="updateStudent(${i},'village',this.value)"
 >
+
+</label>
+
+
+<label>
+
+Monthly Fee (₹)
 
 <input
 type="number"
@@ -390,28 +620,38 @@ placeholder="1500"
 oninput="updateStudent(${i},'fee',this.value)"
 >
 
-<button class="remove" onclick="removeStudent(${i})">
-×
-</button>
+</label>
 
 </div>
+
 `;
+
+box.appendChild(card);
 
 });
 
-document.getElementById("students").innerHTML=html;
 
 updateReceipt();
 
 }
 
 
-function updateStudent(index,key,value){
+function updateStudent(
+index,
+key,
+value
+){
 
 if(key==="fee"){
-students[index][key]=Number(value)||0;
+
+students[index][key] =
+Number(value) || 0;
+
 }else{
-students[index][key]=value;
+
+students[index][key] =
+value;
+
 }
 
 updateReceipt();
@@ -421,146 +661,268 @@ updateReceipt();
 
 function updateReceipt(){
 
-let receipt="";
-
 let total=0;
 
-students.forEach((s,i)=>{
+let receipt =
+document.getElementById(
+"receiptStudents"
+);
 
-total+=Number(s.fee)||0;
+receipt.innerHTML="";
 
-receipt+=`
 
-<div class="student-row">
+students.forEach(function(s,i){
 
-<span>${i+1}</span>
-<span>${escapeHTML(s.name)||"—"}</span>
-<span>${escapeHTML(s.cls)||"—"}</span>
-<span>${escapeHTML(s.village)||"—"}</span>
-<span>₹${Number(s.fee||0).toLocaleString("en-IN")}</span>
-<span></span>
+total +=
+Number(s.fee) || 0;
+
+
+let row =
+document.createElement("div");
+
+row.className="receipt-row";
+
+
+row.innerHTML=`
+
+<div
+style="
+display:flex;
+justify-content:space-between;
+gap:10px
+"
+>
+
+<b>
+
+${i+1}.
+${escapeHTML(s.name) || "—"}
+
+</b>
+
+<b>
+
+₹${Number(s.fee || 0)
+.toLocaleString("en-IN")}
+
+</b>
+
+</div>
+
+
+<div
+style="
+color:#666;
+font-size:14px;
+margin-top:4px
+"
+>
+
+Class:
+${escapeHTML(s.cls) || "—"}
+
+&nbsp; · &nbsp;
+
+Village:
+${escapeHTML(s.village) || "—"}
 
 </div>
 
 `;
 
+
+receipt.appendChild(row);
+
 });
 
-document.getElementById("receiptStudents").innerHTML=receipt;
 
-document.getElementById("grandTotal").innerText=
-"₹"+total.toLocaleString("en-IN");
+document.getElementById(
+"grandTotal"
+).innerText =
+"₹" +
+total.toLocaleString("en-IN");
 
-let month=document.getElementById("month").value;
 
-let year=document.getElementById("year").value;
+document.getElementById(
+"billMonth"
+).innerText =
+document.getElementById("month").value
++
+" "
++
+document.getElementById("year").value;
 
-document.getElementById("billMonth").innerText=
-month+" "+year;
 
-document.getElementById("billDriver").innerText=
-document.getElementById("driver").value||"—";
+document.getElementById(
+"billDriver"
+).innerText =
+document.getElementById("driver").value
+||
+"—";
+
+}
+
+
+function getBill(){
+
+return{
+
+month:
+document.getElementById("month").value
++
+" "
++
+document.getElementById("year").value,
+
+driver:
+document.getElementById("driver").value.trim(),
+
+students:
+students.filter(
+function(s){
+return s.name.trim() !== "";
+}
+),
+
+total:
+students.reduce(
+function(total,s){
+return total + (Number(s.fee) || 0);
+},
+0
+),
+
+date:
+new Date().toLocaleString("en-IN")
+
+};
 
 }
 
 
 function saveBill(){
 
-if(students.length===0){
+let bill =
+getBill();
 
-alert("Please add at least one student.");
 
-return;
+if(bill.students.length===0){
 
-}
-
-let validStudents=students.filter(s=>s.name.trim()!=="");
-
-if(validStudents.length===0){
-
-alert("Please enter student name.");
-
-return;
-
-}
-
-let total=validStudents.reduce(
-(sum,s)=>sum+(Number(s.fee)||0),0
+alert(
+"Please enter at least one student name."
 );
 
-let bill={
+return;
 
-month:document.getElementById("month").value+
-" "+
-document.getElementById("year").value,
+}
 
-driver:document.getElementById("driver").value,
-
-students:validStudents,
-
-total:total,
-
-date:new Date().toLocaleString("en-IN")
-
-};
 
 savedBills.unshift(bill);
 
+
 if(savedBills.length>30){
-savedBills=savedBills.slice(0,30);
+
+savedBills =
+savedBills.slice(0,30);
+
 }
+
+
+try{
 
 localStorage.setItem(
 "transportBills",
 JSON.stringify(savedBills)
 );
 
+}catch(e){
+
+alert(
+"Bill could not be saved in this browser."
+);
+
+return;
+
+}
+
+
 renderSavedBills();
 
-alert("✅ Bill saved successfully!");
+
+alert(
+"✅ Bill saved on this phone."
+);
 
 }
 
 
 function renderSavedBills(){
 
-let box=document.getElementById("savedBills");
+let box =
+document.getElementById(
+"savedBills"
+);
+
 
 if(savedBills.length===0){
 
-box.innerHTML="No bills saved yet.";
+box.innerText =
+"No bills saved yet.";
 
 return;
 
 }
 
+
 box.innerHTML="";
 
-savedBills.forEach((b,index)=>{
 
-let div=document.createElement("div");
+savedBills.forEach(
+function(b,index){
+
+let div =
+document.createElement("div");
 
 div.className="saved-bill";
+
 
 div.innerHTML=`
 
 <div>
 
-<b>${escapeHTML(b.month)}</b><br>
+<b>
+${escapeHTML(b.month)}
+</b>
 
-Driver: ${escapeHTML(b.driver)||"—"}<br>
+<br>
 
-Students: ${b.students.length}<br>
+Driver:
+${escapeHTML(b.driver) || "—"}
 
-Total: ₹${Number(b.total).toLocaleString("en-IN")}
+<br>
+
+Students:
+${b.students.length}
+
+<br>
+
+Total:
+₹${Number(b.total)
+.toLocaleString("en-IN")}
 
 </div>
 
-<button onclick="loadBill(${index})">
+
+<button
+onclick="loadBill(${index})"
+>
+
 Load
+
 </button>
 
 `;
+
 
 box.appendChild(div);
 
@@ -571,27 +933,49 @@ box.appendChild(div);
 
 function loadBill(index){
 
-let b=savedBills[index];
+let bill =
+savedBills[index];
 
-students=b.students.map(s=>({...s}));
 
-let parts=b.month.split(" ");
-
-if(parts.length>=2){
-
-document.getElementById("month").value=parts[0];
-
-document.getElementById("year").value=parts[1];
-
+students =
+bill.students.map(
+function(s){
+return {...s};
 }
+);
 
-document.getElementById("driver").value=b.driver||"";
+
+let parts =
+bill.month.split(" ");
+
+
+document.getElementById(
+"month"
+).value =
+parts[0] || "September";
+
+
+document.getElementById(
+"year"
+).value =
+parts.slice(1).join(" ") || "2026";
+
+
+document.getElementById(
+"driver"
+).value =
+bill.driver || "";
+
 
 render();
 
+
 window.scrollTo({
+
 top:0,
+
 behavior:"smooth"
+
 });
 
 }
@@ -599,60 +983,102 @@ behavior:"smooth"
 
 function shareBill(){
 
-if(students.length===0){
+let bill =
+getBill();
 
-alert("Please add students first.");
+
+if(bill.students.length===0){
+
+alert(
+"Please enter at least one student name."
+);
 
 return;
 
 }
 
-let month=document.getElementById("month").value+
-" "+
-document.getElementById("year").value;
 
-let driver=document.getElementById("driver").value||"—";
+let text =
+"AMICHAND SERVODAY CONVENT SCHOOL\n"
++
+"TRANSPORT FEE BILL\n\n"
++
+"Month: "
++
+bill.month
++
+"\n"
++
+"Driver: "
++
+(bill.driver || "—")
++
+"\n\n";
 
-let total=students.reduce(
-(sum,s)=>sum+(Number(s.fee)||0),0
-);
 
-let text=
-"AMICHAND SERVODAY CONVENT SCHOOL\n"+
-"TRANSPORT FEE BILL\n\n"+
-"Month: "+month+"\n"+
-"Driver: "+driver+"\n\n";
+bill.students.forEach(
+function(s,i){
 
-students.forEach((s,i)=>{
+text +=
 
-text+=
-(i+1)+". "+
-s.name+
-" | Class: "+s.cls+
-" | Village: "+s.village+
-" | ₹"+Number(s.fee).toLocaleString("en-IN")+
+(i+1)
++
+". "
++
+s.name
++
+" | Class: "
++
+(s.cls || "—")
++
+" | Village: "
++
+(s.village || "—")
++
+" | ₹"
++
+Number(s.fee)
+.toLocaleString("en-IN")
++
 "\n";
 
 });
 
-text+=
-"\nGRAND TOTAL: ₹"+
-total.toLocaleString("en-IN");
 
-if(navigator.share){
+text +=
+
+"\nGRAND TOTAL: ₹"
++
+Number(bill.total)
+.toLocaleString("en-IN");
+
+
+if(
+navigator.share
+){
 
 navigator.share({
-title:"Transport Fee Bill",
+
+title:
+"Transport Fee Bill",
+
 text:text
-}).catch(()=>{});
+
+}).catch(
+function(){}
+);
 
 }else{
 
-let url=
-"https://wa.me/?text="+
-encodeURIComponent(text);
+window.open(
 
-window.open(url,"_blank");
+"https://wa.me/?text="
++
+encodeURIComponent(text),
+
+"_blank"
+
+);
 
 }
 
@@ -661,7 +1087,11 @@ window.open(url,"_blank");
 
 function clearAll(){
 
-if(confirm("Clear all students?")){
+if(
+confirm(
+"Clear all students?"
+)
+){
 
 students=[];
 
@@ -672,31 +1102,56 @@ render();
 }
 
 
-function escapeHTML(str){
-
-return String(str)
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
-
-}
+document.getElementById(
+"month"
+)
+.addEventListener(
+"change",
+updateReceipt
+);
 
 
-document.getElementById("month")
-.addEventListener("change",updateReceipt);
+document.getElementById(
+"year"
+)
+.addEventListener(
+"input",
+updateReceipt
+);
 
-document.getElementById("year")
-.addEventListener("input",updateReceipt);
 
-document.getElementById("driver")
-.addEventListener("input",updateReceipt);
+document.getElementById(
+"driver"
+)
+.addEventListener(
+"input",
+updateReceipt
+);
 
 
-addStudent("Rahul Kumar","5th","Kherli Bhaw",1500);
-addStudent("Aman Kumar","6th","Dankaur",1200);
-addStudent("Priya","4th","Kherli",1500);
+// Demo students
+
+addStudent(
+"Rahul Kumar",
+"5th",
+"Kherli Bhaw",
+1500
+);
+
+addStudent(
+"Aman Kumar",
+"6th",
+"Dankaur",
+1200
+);
+
+addStudent(
+"Priya",
+"4th",
+"Kherli",
+1500
+);
+
 
 renderSavedBills();
 
